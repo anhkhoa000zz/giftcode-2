@@ -1,0 +1,9 @@
+name: giftcode-V1
+author: Anhkhoaaa
+main: giftcode\Anhkhoaaa\Main
+version: 1.0
+api: 3.19.2
+
+commands:
+  giftcode:
+    descriptions: "Nhận/Tạo giftcode."
