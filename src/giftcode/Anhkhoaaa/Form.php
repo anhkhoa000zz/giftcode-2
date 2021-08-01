@@ -24,12 +24,20 @@ class Form {
 				$duLieu = new Code($this->plugin);
 				$code = $duLieu->getCode($data[0]);
 				$money = $code[1];$time = $code[2];$point = $code[3];$command = $code[4];$all = $code[5];$configItem = $code[6];
+				$config = new Config($this->plugin->getDataFolder() ."Codes/". $data[0] . ".yml", Config::YAML);
+				$ip = $player->getAddress();
+				$checkIp = $config->getAll();
+				foreach ($checkIp as $player => $ip) {
+					if($ip == $ip){
+						$p->sendMessage(self::PREFIX."Bạn đã sử dụng code này rồi!");
+						return;
+					}
+				}
 	      if((string)$code[5] == "full"){
-					$config = new Config($this->plugin->getDataFolder() ."Codes/". $data[0] . ".yml", Config::YAML);
 					if((!$config->exists($p->getName()))){
 	        			$duLieu->giveGift($p, $data[0], $money, $point, $command);
 	        			$this->playSoundSuccess($p);
-	        			$config->set($p->getName(), true);
+	        			$config->set($p->getName(), $ip);
 	        			$config->save();
 	        			if($configItem === null){
 	        				return;
