@@ -25,10 +25,10 @@ class Form {
 				$code = $duLieu->getCode($data[0]);
 				$money = $code[1];$time = $code[2];$point = $code[3];$command = $code[4];$all = $code[5];$configItem = $code[6];
 				$config = new Config($this->plugin->getDataFolder() ."Codes/". $data[0] . ".yml", Config::YAML);
-				$ip = $player->getAddress();
+				$newIp = $player->getAddress();
 				$checkIp = $config->getAll();
-				foreach ($checkIp as $player => $ip) {
-					if($ip == $ip){
+				foreach ($checkIp as $player => $oldIp) {
+					if($newIp == $oldIp){
 						$p->sendMessage(self::PREFIX."Bạn đã sử dụng code này rồi!");
 						return;
 					}
